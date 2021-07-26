@@ -35,6 +35,41 @@ body {
   text-align: center;
 }
 
+.container {
+  padding: 5vw 0;
+}
+
 form {
   background: lightslategray;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid purple;
+}
+
+li {
+  border: 1px solid grey;
+  flex-basis: 300px;
+  padding: 20px;
+  margin: 20px;
+}
+
+ul button {
+  border: none;
+  background: pink;
+}
+
+ul button:hover {
+  background: palevioletred;
+}
+
+
+footer {
+  padding: 10px 0;
+  background: #000;
+  color: #fff;
 }

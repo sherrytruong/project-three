@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
 
-  const [ potlucklist , setPotluckList ] = useState([]);
+  const [ potluckList , setPotluckList ] = useState([]);
   const [ userInput, setUserInput] = useState("");
 
   useEffect( () => {
@@ -53,32 +53,44 @@ function App() {
     setUserInput("");
   }
 
+  const handleDelete = (keyToDelete) => {
+    console.log(keyToDelete);
+    const dbRef = firebase.database().ref();
+    dbRef.child(keyToDelete).remove();
+  }
+
   return (
-    <div className="App wrapper">
-      <h1>Potluck Tracker!</h1>
-      <form action="submit" onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="Your Name" onChange={handleChange} value={userInput}/>
-        {/* <select name="type" id="type" placeholder="Select Item Type">
-          <option value="appetizer">Appetizer</option>
-          <option value="main">Main</option>
-          <option value="dessert">Dessert</option>
-          <option value="beverage">Beverage</option>
-          <option value="other">Other</option>
-        </select> */}
-        {/* <input type="text" name="item" placeholder="Your Item" onChange={handleChange} value={userItem} /> */}
-        <button type="submit">Add</button>
-      </form>
-      <ul>
-        {/* {potluckList.map( (potluckLi) => {
-          return (
-            <li>
-              <p>{potluckLi}</p>
-            </li>
-          )
-        })} */}
-      </ul>
-      <p>Created at Juno College by Sherry Truong</p>
+    <div className="App">
+      <div className="container wrapper">
+        <h1>Potluck Pinboard</h1>
+        <form action="submit" onSubmit={handleSubmit}>
+          <input type="text" name="name" placeholder="Your Name" onChange={handleChange} value={userInput}/>
+          {/* <input type="text" name="item" placeholder="Your Item" onChange={handleChange} value={userItem} /> */}
+          {/* <select name="type" id="type" placeholder="Select Item Type">
+            <option value="appetizer">Appetizer</option>
+            <option value="main">Main</option>
+            <option value="dessert">Dessert</option>
+            <option value="beverage">Beverage</option>
+            <option value="other">Other</option>
+          </select> */}
+          <button type="submit">Add</button>
+        </form>
+        <ul>
+          {potluckList.map( (potluckLi) => {
+            return (
+              <li key={potluckLi.key}>
+                <p>Name: {potluckLi.value}</p>
+                <button onClick={() => handleDelete(potluckLi.key)}> Remove </button>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+      <footer>
+        <p>Created at <a href="http://junocollege.com" target="_blank">Juno College</a> by Sherry Truong</p>
+      </footer>
     </div>
+
 
   );
 }
