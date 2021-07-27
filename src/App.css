@@ -17,7 +17,7 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 
 body {
   font-family: ;
-  background: seashell;
+  background: #ffd9d9;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -39,8 +39,52 @@ body {
   padding: 5vw 0;
 }
 
+h1 {
+  padding: 5px 10px;
+  color: #000;
+  font-size: 40px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+p {
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: #de5499;
+  cursor: pointer;
+}
+
 form {
-  background: lightslategray;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 300px;
+  margin: 30px auto;
+  padding: 20px 10px;
+  border: 1px solid #465053;
+}
+
+form input[type=text], 
+form button[type=submit], 
+select {
+  padding: 5px;
+  background: #fff;
+  border: none;
+  border-radius: 5px;
+  flex: 1 1 500px;
+}
+
+form button[type=submit] {
+  background: #de5499;
+  color: #fff;
+  margin: 15px auto;
+  flex: 0 1 50px;
+  min-width: 100px;
+  cursor: pointer;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-transform: uppercase;
 }
 
 ul {
@@ -48,24 +92,45 @@ ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border: 1px solid purple;
 }
 
 li {
-  border: 1px solid grey;
+  background: #eec393;
+  height: 220px;
+  border-radius: 2px;
+  box-shadow: 2px 2px 5px #af8657;
   flex-basis: 300px;
+  text-align: left;
   padding: 20px;
-  margin: 20px;
+  margin: 15px;
+  position: relative;
 }
 
 ul button {
-  border: none;
-  background: pink;
+
 }
 
 ul button:hover {
-  background: palevioletred;
+  color: #d83e18;
+  cursor: pointer;
 }
+
+.removeBtn {
+  font-weight: bold;
+  font-size: 20px;
+  border: none;
+  color: #a56300;
+  background: none;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+span {
+  font-weight: bold;
+}
+
+
 
 
 footer {

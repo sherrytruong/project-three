@@ -5,7 +5,10 @@ import './App.css';
 function App() {
 
   const [ potluckList , setPotluckList ] = useState([]);
-  const [ userInput, setUserInput] = useState("");
+  const [ nameInput, setNameInput] = useState("");
+  const [ itemInput, setItemInput] = useState("");
+  const [ categorySelect, setCategorySelect] = useState("Select");
+  const [ countValue, setCountValue] = useState(0);
 
   useEffect( () => {
     // Variable that holds reference to database
@@ -35,23 +38,35 @@ function App() {
 
       setPotluckList(newStateArray);
 
-
-
-
-
     })
   }, []);
 
-  const handleChange = (event) => {
-    setUserInput(event.target.value);
+  const handleClick = () => {
+    setCountValue(countValue + 1);
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const dbRef = firebase.database().ref();
-    dbRef.push(userInput);
-    setUserInput("");
+  const handleChange = (e) => {
+    // setNameInput(e.target.value);
+    const { name, value } = e.target;
+    if(name === "name") {
+      setNameInput(value)
+    } else {
+      setItemInput(value);
+    }
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (nameInput !== "" && itemInput !== "") {
+      const dbRef = firebase.database().ref();
+      dbRef.push(nameInput);
+      setNameInput("");
+      setItemInput("");
+      setCategorySelect("Select");
+    } else if (nameInput !== "" || itemInput !== "") {
+      alert("Enter a valid response");
+  }
+}
 
   const handleDelete = (keyToDelete) => {
     console.log(keyToDelete);
@@ -63,24 +78,50 @@ function App() {
     <div className="App">
       <div className="container wrapper">
         <h1>Potluck Pinboard</h1>
+        <p>Avoid bringing the same items and </p>
         <form action="submit" onSubmit={handleSubmit}>
-          <input type="text" name="name" placeholder="Your Name" onChange={handleChange} value={userInput}/>
-          {/* <input type="text" name="item" placeholder="Your Item" onChange={handleChange} value={userItem} /> */}
-          {/* <select name="type" id="type" placeholder="Select Item Type">
-            <option value="appetizer">Appetizer</option>
-            <option value="main">Main</option>
+          <label htmlfor="Name">Name:</label>
+          <input 
+            id="userNameInput"
+            type="text" 
+            name="name" 
+            placeholder="Your Name" 
+            onChange={handleChange} 
+            value={nameInput} 
+          />
+          <label htmlfor="Item">Item:</label>
+          <input 
+            id="userItemInput"
+            type="text" 
+            name="item" 
+            placeholder="Your Item" 
+            onChange={handleChange} 
+            value={itemInput} 
+          />
+          <label htmlfor="Category">Category:</label>
+          <select 
+            name="type" 
+            id="userCategorySelect" 
+            value={categorySelect} 
+          >
+            <option value disabled selected>-- Select Category --</option>
+            <option value="appetizer">Appetizer/Sides</option>
+            <option value="main">Main Dish</option>
             <option value="dessert">Dessert</option>
             <option value="beverage">Beverage</option>
             <option value="other">Other</option>
-          </select> */}
+          </select>
           <button type="submit">Add</button>
         </form>
         <ul>
           {potluckList.map( (potluckLi) => {
             return (
               <li key={potluckLi.key}>
-                <p>Name: {potluckLi.value}</p>
-                <button onClick={() => handleDelete(potluckLi.key)}> Remove </button>
+                <p><span>Name:</span> {potluckLi.value}</p>
+                <p><span>Item:</span> </p>
+                <p><span>Category:</span> </p>
+                <p><button onClick={handleClick}>♥</button> {countValue} likes</p>
+                <button class="removeBtn" onClick={() => handleDelete(potluckLi.key)}> x </button>
               </li>
             )
           })}
