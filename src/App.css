@@ -17,7 +17,7 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 
 body {
   font-family: ;
-  background: #ffd9d9;
+  background: #ffe2e2;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -41,18 +41,19 @@ body {
 
 h1 {
   padding: 5px 10px;
-  color: #000;
-  font-size: 40px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #6a7c39;
+  font-size: 50px;
+  letter-spacing: 5px;
 }
 
 p {
   line-height: 1.5;
+  letter-spacing: 0.3px;
 }
 
 a {
   text-decoration: none;
-  color: #de5499;
+  color: #6a7c39;
   cursor: pointer;
 }
 
@@ -63,21 +64,23 @@ form {
   max-width: 300px;
   margin: 30px auto;
   padding: 20px 10px;
-  border: 1px solid #465053;
 }
 
 form input[type=text], 
-form button[type=submit], 
 select {
   padding: 5px;
   background: #fff;
   border: none;
+  border: 2px solid #ecc1cf;
   border-radius: 5px;
   flex: 1 1 500px;
 }
 
 form button[type=submit] {
   background: #de5499;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
   color: #fff;
   margin: 15px auto;
   flex: 0 1 50px;
@@ -85,6 +88,11 @@ form button[type=submit] {
   cursor: pointer;
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-transform: uppercase;
+}
+
+form button[type=submit]:hover,
+form button[type=submit]:focus {
+  background: #df8fb7;
 }
 
 ul {
@@ -111,7 +119,7 @@ ul button {
 }
 
 ul button:hover {
-  color: #d83e18;
+  color: #d81818;
   cursor: pointer;
 }
 
@@ -119,7 +127,7 @@ ul button:hover {
   font-weight: bold;
   font-size: 20px;
   border: none;
-  color: #a56300;
+  color: #d88200;
   background: none;
   position: absolute;
   top: 10px;

@@ -7,7 +7,7 @@ function App() {
   const [ potluckList , setPotluckList ] = useState([]);
   const [ nameInput, setNameInput] = useState("");
   const [ itemInput, setItemInput] = useState("");
-  const [ categorySelect, setCategorySelect] = useState("Select");
+  // const [ categorySelect, setCategorySelect] = useState("Select");
   const [ countValue, setCountValue] = useState(0);
 
   useEffect( () => {
@@ -41,6 +41,7 @@ function App() {
     })
   }, []);
 
+
   const handleClick = () => {
     setCountValue(countValue + 1);
   }
@@ -52,7 +53,7 @@ function App() {
       setNameInput(value)
     } else {
       setItemInput(value);
-    }
+    } 
   }
 
   const handleSubmit = (e) => {
@@ -62,11 +63,18 @@ function App() {
       dbRef.push(nameInput);
       setNameInput("");
       setItemInput("");
-      setCategorySelect("Select");
     } else if (nameInput !== "" || itemInput !== "") {
       alert("Enter a valid response");
   }
 }
+
+  // const testing = {
+  //   name: nameInput,
+  //   item: itemInput
+  // }
+
+
+      // dbRef.push(testing);  why does this not work?
 
   const handleDelete = (keyToDelete) => {
     console.log(keyToDelete);
@@ -77,8 +85,8 @@ function App() {
   return (
     <div className="App">
       <div className="container wrapper">
-        <h1>Potluck Pinboard</h1>
-        <p>Avoid bringing the same items and </p>
+        <h1>Potluck Board</h1>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam quis et tenetur dolor, nostrum pariatur ut corrupti magni. Facilis architecto tempore aut neque qui omnis est doloribus saepe! </p>
         <form action="submit" onSubmit={handleSubmit}>
           <label htmlfor="Name">Name:</label>
           <input 
@@ -102,7 +110,8 @@ function App() {
           <select 
             name="type" 
             id="userCategorySelect" 
-            value={categorySelect} 
+            // value={categorySelect} 
+            // onChange={handleChange}
           >
             <option value disabled selected>-- Select Category --</option>
             <option value="appetizer">Appetizer/Sides</option>
