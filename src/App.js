@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react';
 import firebase from './firebase';
 import './App.css';
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+library.add(faTimes);
+
 function App() {
 
   const [ potluckList , setPotluckList ] = useState([]);
@@ -141,6 +146,7 @@ function App() {
                 </ul>
                   <p><button onClick={handleClick}>♥</button> {countValue}</p>
                 <button className="removeBtn" onClick={() => handleDelete(potluckLi.key)}> x </button>
+                <FontAwesomeIcon icon={["fa", "Times"]} />
               </li>
             )
           })}
