@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import firebase from './firebase';
 import './App.css';
+import Instructions from './Instructions';
+import Footer from './Footer';
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -9,11 +11,11 @@ library.add(faTimes);
 
 function App() {
 
-  const [ potluckList , setPotluckList ] = useState([]);
-  const [ nameInput, setNameInput] = useState("");
-  const [ itemInput, setItemInput] = useState("");
-  const [ categorySelect, setCategorySelect] = useState("placeholder");
-  const [ countValue, setCountValue] = useState(0);
+  const [ potluckList, setPotluckList ] = useState([]);
+  const [ nameInput, setNameInput ] = useState("");
+  const [ itemInput, setItemInput ] = useState("");
+  const [ categorySelect, setCategorySelect ] = useState("placeholder");
+  const [countValue, setCountValue] = useState(0);
 
   useEffect( () => {
 
@@ -44,11 +46,6 @@ function App() {
 
   }, []);
 
-  // Function that handles clicks on counter
-  const handleClick = () => {
-    setCountValue(countValue + 1);
-  }
-
   // Function that handles changes in select element on form 
   const handleSelectChange = (e) => {
     setCategorySelect(e.target.value);
@@ -59,10 +56,10 @@ function App() {
     const { name, value } = e.target;
     if (name === "userNameInput") {
       setNameInput(value);
-    } 
+    }
     else {
       setItemInput(value);
-    } 
+    }
   }
 
   // Function that listens to submit button and runs the following code
@@ -76,8 +73,13 @@ function App() {
       setCategorySelect("placeholder");
     } else if (nameInput !== "" || itemInput !== "" && nameInput == "" || itemInput == "") {
       alert("Enter a valid response");
+    }
   }
-}
+
+  // Function that handles clicks on counter
+  const handleClick = () => {
+    setCountValue(countValue + 1);
+  }
 
   // Function that deletes the li element upon user click
   const handleDelete = (keyToDelete) => {
@@ -87,39 +89,39 @@ function App() {
 
   return (
     <div className="App">
+
       <div className="container wrapper">
         <header>
           <h1>Potluck Board</h1>
         </header>
-        <section className="instructions">
-          <p>Hosting a potluck party, or attending as a guest? Potluck Board has you covered on tracking all the contributions! Complete the fields below to make note of what you are bringing to your event. Check what other guests are contributing to the potluck, and avoid doubling up on the same items.</p>
-        </section>
+
+        <Instructions />
 
         {/* ---- Form Section --- */}
         <form action="submit" onSubmit={handleSubmit}>
           <label htmlfor="userNameInput" class="sr-only">Name:</label>
-          <input 
+          <input
             id="userNameInput"
-            type="text" 
+            type="text"
             name="userNameInput"
-            placeholder="Your Name" 
-            onChange={handleInputChange} 
-            value={nameInput} 
+            placeholder="Your Name"
+            onChange={handleInputChange}
+            value={nameInput}
           />
           <label htmlfor="userItemInput" class="sr-only">Item:</label>
-          <input 
+          <input
             id="userItemInput"
-            type="text" 
+            type="text"
             name="userItemInput"
-            placeholder="Your Item" 
-            onChange={handleInputChange} 
-            value={itemInput} 
+            placeholder="Your Item"
+            onChange={handleInputChange}
+            value={itemInput}
           />
           <label htmlfor="userCategorySelect" class="sr-only">Category:</label>
-          <select 
+          <select
             name="userCategorySelect"
-            id="userCategorySelect" 
-            value={categorySelect} 
+            id="userCategorySelect"
+            value={categorySelect}
             onChange={handleSelectChange}
           >
             <option value="placeholder" selected disabled>-- Select Category --</option>
@@ -134,7 +136,7 @@ function App() {
 
         {/* ---- Display Results Section --- */}
         <ul>
-          {potluckList.map( (potluckLi) => {
+          {potluckList.map((potluckLi) => {
             return (
               <li className="stickyNoteLi" key={potluckLi.key}>
                 <div className="pin">
@@ -144,21 +146,16 @@ function App() {
                   <li><p><span className="item">Bringing:</span> {potluckLi.value[1]}</p></li>
                   <li><p><span className="category">Category:</span> {potluckLi.value[2]}</p></li>
                 </ul>
-                  <p><button onClick={handleClick}>♥</button> {countValue}</p>
+                <p><button onClick={handleClick}>♥</button> {countValue}</p>
                 <button className="removeBtn" onClick={() => handleDelete(potluckLi.key)}> x </button>
-                <FontAwesomeIcon icon={["fa", "Times"]} />
+                {/* <FontAwesomeIcon icon={["fa", "Times", "circle"]} /> */}
               </li>
             )
           })}
         </ul>
       </div>
-
-      {/* ---- Footer --- */}
-      <footer>
-        <p>Created at <a href="http://junocollege.com" target="_blank">Juno College</a> by Sherry Truong</p>
-      </footer>
+      <Footer />
     </div>
-
 
   );
 }
