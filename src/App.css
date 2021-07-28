@@ -10,6 +10,8 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 
 /* END SET UP CSS */
 
+
+
 * {
   margin: 0;
   padding: 0;
@@ -17,7 +19,7 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 
 body {
   font-family: ;
-  background: #ffe2e2;
+  background: #fde6e6;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -44,6 +46,8 @@ h1 {
   color: #6a7c39;
   font-size: 50px;
   letter-spacing: 5px;
+  text-transform: uppercase;
+  text-shadow: 3px 3px #f1c7c7;
 }
 
 p {
@@ -63,12 +67,13 @@ form {
   justify-content: center;
   max-width: 300px;
   margin: 30px auto;
-  padding: 20px 10px;
+  padding: 10px 10px;
 }
 
 form input[type=text], 
 select {
   padding: 5px;
+  margin: 5px 0;
   background: #fff;
   border: none;
   border: 2px solid #ecc1cf;
@@ -79,7 +84,7 @@ select {
 form button[type=submit] {
   background: #de5499;
   border: none;
-  padding: 5px;
+  padding: 8px 5px;
   border-radius: 5px;
   color: #fff;
   margin: 15px auto;
@@ -102,25 +107,33 @@ ul {
   justify-content: center;
 }
 
-li {
-  background: #eec393;
-  height: 220px;
+.stickyNoteLi {
+  background: #ffd19d;
+  color: #3d2505;
+  height: 230px;
   border-radius: 2px;
-  box-shadow: 2px 2px 5px #af8657;
-  flex-basis: 300px;
+  box-shadow: 2px 2px 2px #ccaa82;
+  flex-basis: 245px;
   text-align: left;
-  padding: 20px;
+  padding: 25px;
   margin: 15px;
   position: relative;
 }
 
 ul button {
-
+  border: none;
+  color: #d31e1e;
+  background: none;
 }
 
 ul button:hover {
-  color: #d81818;
+  color: #f73c3c;
   cursor: pointer;
+}
+
+.stickyContainer {
+  display: flex;
+  flex-direction: column;
 }
 
 .removeBtn {
@@ -136,10 +149,25 @@ ul button:hover {
 
 span {
   font-weight: bold;
+  color: #2089a3;
+  background: #10978518;
+  text-shadow: 1px 1px #ffffffce;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-top: 5px;
 }
 
-
-
+.pin {
+  width: 20px;
+  height: 20px;
+  background: #dd4949;
+  box-shadow: 2px 2px 4px #755b53;
+  border-bottom: 3px solid #963131;
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  left: 47.5%;
+}
 
 footer {
   padding: 10px 0;

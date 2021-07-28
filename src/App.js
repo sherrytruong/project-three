@@ -7,7 +7,7 @@ function App() {
   const [ potluckList , setPotluckList ] = useState([]);
   const [ nameInput, setNameInput] = useState("");
   const [ itemInput, setItemInput] = useState("");
-  // const [ categorySelect, setCategorySelect] = useState("Select");
+  const [ categorySelect, setCategorySelect] = useState("");
   const [ countValue, setCountValue] = useState(0);
 
   useEffect( () => {
@@ -49,9 +49,10 @@ function App() {
   const handleChange = (e) => {
     // setNameInput(e.target.value);
     const { name, value } = e.target;
-    if(name === "name") {
-      setNameInput(value)
-    } else {
+    if (name === "userNameInput") {
+      setNameInput(value);
+    } 
+    else {
       setItemInput(value);
     } 
   }
@@ -60,21 +61,18 @@ function App() {
     e.preventDefault();
     if (nameInput !== "" && itemInput !== "") {
       const dbRef = firebase.database().ref();
-      dbRef.push(nameInput);
+      dbRef.push([nameInput, itemInput]);
       setNameInput("");
       setItemInput("");
-    } else if (nameInput !== "" || itemInput !== "") {
+      setCategorySelect(""); // how to make this clear out?
+    } else if (nameInput !== "" || itemInput !== "" && nameInput == "" || itemInput == "") {
       alert("Enter a valid response");
   }
 }
 
-  // const testing = {
-  //   name: nameInput,
-  //   item: itemInput
+  // const handleUserCategorySelect = (e) => {
+  //   setCategorySelect(e.target.value)
   // }
-
-
-      // dbRef.push(testing);  why does this not work?
 
   const handleDelete = (keyToDelete) => {
     console.log(keyToDelete);
@@ -88,32 +86,32 @@ function App() {
         <h1>Potluck Board</h1>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam quis et tenetur dolor, nostrum pariatur ut corrupti magni. Facilis architecto tempore aut neque qui omnis est doloribus saepe! </p>
         <form action="submit" onSubmit={handleSubmit}>
-          <label htmlfor="Name">Name:</label>
+          <label htmlfor="userNameInput" class="sr-only">Name:</label>
           <input 
             id="userNameInput"
             type="text" 
-            name="name" 
+            name="userNameInput"
             placeholder="Your Name" 
             onChange={handleChange} 
             value={nameInput} 
           />
-          <label htmlfor="Item">Item:</label>
+          <label htmlfor="userItemInput" class="sr-only">Item:</label>
           <input 
             id="userItemInput"
             type="text" 
-            name="item" 
+            name="userItemInput"
             placeholder="Your Item" 
             onChange={handleChange} 
             value={itemInput} 
           />
-          <label htmlfor="Category">Category:</label>
+          <label htmlfor="userCategorySelect" class="sr-only">Category:</label>
           <select 
-            name="type" 
+            name="userCategorySelect"
             id="userCategorySelect" 
             // value={categorySelect} 
-            // onChange={handleChange}
+            // onChange={handleUserCategorySelect}
           >
-            <option value disabled selected>-- Select Category --</option>
+            <option value="placeholder" selected disabled>-- Select Category --</option>
             <option value="appetizer">Appetizer/Sides</option>
             <option value="main">Main Dish</option>
             <option value="dessert">Dessert</option>
@@ -125,12 +123,17 @@ function App() {
         <ul>
           {potluckList.map( (potluckLi) => {
             return (
-              <li key={potluckLi.key}>
-                <p><span>Name:</span> {potluckLi.value}</p>
-                <p><span>Item:</span> </p>
-                <p><span>Category:</span> </p>
-                <p><button onClick={handleClick}>♥</button> {countValue} likes</p>
-                <button class="removeBtn" onClick={() => handleDelete(potluckLi.key)}> x </button>
+              <li className="stickyNoteLi" key={potluckLi.key}>
+                <div className="pin">
+                </div>
+                <ul className="stickyContainer">
+                  <li><p><span>Name:</span> {potluckLi.value[0]}</p></li>
+                  <li><p><span>Item:</span> {potluckLi.value[1]}</p></li>
+                  <li><p><span>Category:</span> {potluckLi.value[2]}</p></li>
+                </ul>
+                  <p><button onClick={handleClick}>♥</button> {countValue} likes</p>
+                  <button class="removeBtn" onClick={() => handleDelete(potluckLi.key)}> x </button>
+                {/* </div> */}
               </li>
             )
           })}
