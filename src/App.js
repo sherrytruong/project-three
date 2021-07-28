@@ -7,51 +7,50 @@ function App() {
   const [ potluckList , setPotluckList ] = useState([]);
   const [ nameInput, setNameInput] = useState("");
   const [ itemInput, setItemInput] = useState("");
-  const [ categorySelect, setCategorySelect] = useState("");
+  const [ categorySelect, setCategorySelect] = useState("placeholder");
   const [ countValue, setCountValue] = useState(0);
 
   useEffect( () => {
+
     // Variable that holds reference to database
     const dbRef = firebase.database().ref();
-
-    // Add event listener to variable dbRef, will fire each time there is a change in value in database. Function takes a callback function which will get data (response) from the database
+    // Event listener to variable dbRef; fires each time there is a change in value in database. Takes a callback function which will get data (response) from the database
     dbRef.on('value', (response) => {
       // Store response from query to firebase inside responseData variable
       const responseData = response.val();
-      console.log(responseData);
 
       // Variable that stores the new state
       const newStateArray = [];
 
+      // Local variable propertyName represents each of the properties or keys in responseData object
       for (let propertyName in responseData) {
-        console.log(propertyName);
-        console.log(responseData[propertyName])
-
+        // New object is declared and is pushed into newStateArray
         const Object = {
           key: propertyName,
           value: responseData[propertyName]
         }
-
         newStateArray.push(Object);
-
       }
 
+      // Set new potluck list to state
       setPotluckList(newStateArray);
 
     })
+
   }, []);
 
-
+  // Function that handles clicks on counter
   const handleClick = () => {
     setCountValue(countValue + 1);
   }
 
+  // Function that handles changes in select element on form 
   const handleSelectChange = (e) => {
     setCategorySelect(e.target.value);
   }
 
+  // Function that handles changes in input elements on form
   const handleInputChange = (e) => {
-    // setNameInput(e.target.value);
     const { name, value } = e.target;
     if (name === "userNameInput") {
       setNameInput(value);
@@ -61,25 +60,22 @@ function App() {
     } 
   }
 
+  // Function that listens to submit button and runs the following code
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (nameInput !== "" && itemInput !== "") {
+    if (nameInput !== "" && itemInput !== "" && categorySelect !== "placeholder") {
       const dbRef = firebase.database().ref();
       dbRef.push([nameInput, itemInput, categorySelect]);
       setNameInput("");
       setItemInput("");
-      setCategorySelect(); // how to make this clear out?
+      setCategorySelect("placeholder");
     } else if (nameInput !== "" || itemInput !== "" && nameInput == "" || itemInput == "") {
       alert("Enter a valid response");
   }
 }
 
-  // const handleUserCategorySelect = (e) => {
-  //   setCategorySelect(e.target.value)
-  // }
-
+  // Function that deletes the li element upon user click
   const handleDelete = (keyToDelete) => {
-    console.log(keyToDelete);
     const dbRef = firebase.database().ref();
     dbRef.child(keyToDelete).remove();
   }
@@ -87,8 +83,14 @@ function App() {
   return (
     <div className="App">
       <div className="container wrapper">
-        <h1>Potluck Board</h1>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam quis et tenetur dolor, nostrum pariatur ut corrupti magni. Facilis architecto tempore aut neque qui omnis est doloribus saepe! </p>
+        <header>
+          <h1>Potluck Board</h1>
+        </header>
+        <section className="instructions">
+          <p>Hosting a potluck party, or attending as a guest? Potluck Board has you covered on tracking all the contributions! Complete the fields below to make note of what you are bringing to your event. Check what other guests are contributing to the potluck, and avoid doubling up on the same items.</p>
+        </section>
+
+        {/* ---- Form Section --- */}
         <form action="submit" onSubmit={handleSubmit}>
           <label htmlfor="userNameInput" class="sr-only">Name:</label>
           <input 
@@ -124,7 +126,8 @@ function App() {
           </select>
           <button type="submit">Add</button>
         </form>
-        <h2>What is everyone bringing?</h2>
+
+        {/* ---- Display Results Section --- */}
         <ul>
           {potluckList.map( (potluckLi) => {
             return (
@@ -132,18 +135,19 @@ function App() {
                 <div className="pin">
                 </div>
                 <ul className="stickyContainer">
-                  <li><p><span>Name:</span> {potluckLi.value[0]}</p></li>
-                  <li><p><span>Item:</span> {potluckLi.value[1]}</p></li>
-                  <li><p><span>Category:</span> {potluckLi.value[2]}</p></li>
+                  <li><p><span className="name">Name:</span> {potluckLi.value[0]}</p></li>
+                  <li><p><span className="item">Bringing:</span> {potluckLi.value[1]}</p></li>
+                  <li><p><span className="category">Category:</span> {potluckLi.value[2]}</p></li>
                 </ul>
-                  <p><button onClick={handleClick}>♥</button> {countValue} likes</p>
-                  <button class="removeBtn" onClick={() => handleDelete(potluckLi.key)}> x </button>
-                {/* </div> */}
+                  <p><button onClick={handleClick}>♥</button> {countValue}</p>
+                <button className="removeBtn" onClick={() => handleDelete(potluckLi.key)}> x </button>
               </li>
             )
           })}
         </ul>
       </div>
+
+      {/* ---- Footer --- */}
       <footer>
         <p>Created at <a href="http://junocollege.com" target="_blank">Juno College</a> by Sherry Truong</p>
       </footer>
