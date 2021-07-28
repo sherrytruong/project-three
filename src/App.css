@@ -50,6 +50,11 @@ h1 {
   text-shadow: 3px 3px #f1c7c7;
 }
 
+h2 {
+  font-weight: normal;
+  color: #6a7c39;
+}
+
 p {
   line-height: 1.5;
   letter-spacing: 0.3px;
@@ -66,7 +71,7 @@ form {
   flex-wrap: wrap;
   justify-content: center;
   max-width: 300px;
-  margin: 30px auto;
+  margin: 20px auto;
   padding: 10px 10px;
 }
 
@@ -105,18 +110,20 @@ ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 15px;
 }
 
 .stickyNoteLi {
   background: #ffd19d;
   color: #3d2505;
-  height: 230px;
+  min-height: 230px;
+  height: 100%;
   border-radius: 2px;
   box-shadow: 2px 2px 2px #ccaa82;
   flex-basis: 245px;
   text-align: left;
   padding: 25px;
-  margin: 15px;
+  margin: 10px;
   position: relative;
 }
 

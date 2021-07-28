@@ -46,7 +46,11 @@ function App() {
     setCountValue(countValue + 1);
   }
 
-  const handleChange = (e) => {
+  const handleSelectChange = (e) => {
+    setCategorySelect(e.target.value);
+  }
+
+  const handleInputChange = (e) => {
     // setNameInput(e.target.value);
     const { name, value } = e.target;
     if (name === "userNameInput") {
@@ -61,10 +65,10 @@ function App() {
     e.preventDefault();
     if (nameInput !== "" && itemInput !== "") {
       const dbRef = firebase.database().ref();
-      dbRef.push([nameInput, itemInput]);
+      dbRef.push([nameInput, itemInput, categorySelect]);
       setNameInput("");
       setItemInput("");
-      setCategorySelect(""); // how to make this clear out?
+      setCategorySelect(); // how to make this clear out?
     } else if (nameInput !== "" || itemInput !== "" && nameInput == "" || itemInput == "") {
       alert("Enter a valid response");
   }
@@ -92,7 +96,7 @@ function App() {
             type="text" 
             name="userNameInput"
             placeholder="Your Name" 
-            onChange={handleChange} 
+            onChange={handleInputChange} 
             value={nameInput} 
           />
           <label htmlfor="userItemInput" class="sr-only">Item:</label>
@@ -101,25 +105,26 @@ function App() {
             type="text" 
             name="userItemInput"
             placeholder="Your Item" 
-            onChange={handleChange} 
+            onChange={handleInputChange} 
             value={itemInput} 
           />
           <label htmlfor="userCategorySelect" class="sr-only">Category:</label>
           <select 
             name="userCategorySelect"
             id="userCategorySelect" 
-            // value={categorySelect} 
-            // onChange={handleUserCategorySelect}
+            value={categorySelect} 
+            onChange={handleSelectChange}
           >
             <option value="placeholder" selected disabled>-- Select Category --</option>
-            <option value="appetizer">Appetizer/Sides</option>
-            <option value="main">Main Dish</option>
-            <option value="dessert">Dessert</option>
-            <option value="beverage">Beverage</option>
-            <option value="other">Other</option>
+            <option value="Main Dish">Main Dish</option>
+            <option value="Side Dish">Side Dish</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Beverage">Beverage</option>
+            <option value="Other">Other</option>
           </select>
           <button type="submit">Add</button>
         </form>
+        <h2>What is everyone bringing?</h2>
         <ul>
           {potluckList.map( (potluckLi) => {
             return (
