@@ -15,7 +15,7 @@ function App() {
   const [ nameInput, setNameInput ] = useState("");
   const [ itemInput, setItemInput ] = useState("");
   const [ categorySelect, setCategorySelect ] = useState("placeholder");
-  const [countValue, setCountValue] = useState(0);
+  const [ categorySelectText, setCategorySelectText ] = useState("");
 
   useEffect( () => {
 
@@ -46,11 +46,6 @@ function App() {
 
   }, []);
 
-  // Function that handles changes in select element on form 
-  const handleSelectChange = (e) => {
-    setCategorySelect(e.target.value);
-  }
-
   // Function that handles changes in input elements on form
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -62,23 +57,33 @@ function App() {
     }
   }
 
+  // Function that converts the value name to a string with space and capitalization
+  const categorySelectDisplayText = {
+    mainDish: "Main Dish",
+    sideDish: "Side Dish",
+    dessert: "Dessert",
+    beverage: "Beverage",
+    other: "Other"
+  };
+
+  // Function that handles changes in select element on form 
+  const handleSelectChange = (e) => {
+    setCategorySelect(e.target.value);
+    setCategorySelectText(categorySelectDisplayText[e.target.value]);
+  }
+
   // Function that listens to submit button and runs the following code
   const handleSubmit = (e) => {
     e.preventDefault();
     if (nameInput !== "" && itemInput !== "" && categorySelect !== "placeholder") {
       const dbRef = firebase.database().ref();
-      dbRef.push([nameInput, itemInput, categorySelect]);
+      dbRef.push([nameInput, itemInput, categorySelect, categorySelectText]);
       setNameInput("");
       setItemInput("");
       setCategorySelect("placeholder");
     } else if (nameInput !== "" || itemInput !== "" && nameInput == "" || itemInput == "") {
       alert("Enter a valid response");
-    }
-  }
-
-  // Function that handles clicks on counter
-  const handleClick = () => {
-    setCountValue(countValue + 1);
+    };
   }
 
   // Function that deletes the li element upon user click
@@ -125,11 +130,11 @@ function App() {
             onChange={handleSelectChange}
           >
             <option value="placeholder" selected disabled>-- Select Category --</option>
-            <option value="Main Dish">Main Dish</option>
-            <option value="Side Dish">Side Dish</option>
-            <option value="Dessert">Dessert</option>
-            <option value="Beverage">Beverage</option>
-            <option value="Other">Other</option>
+            <option value="mainDish">Main Dish</option>
+            <option value="sideDish">Side Dish</option>
+            <option value="dessert">Dessert</option>
+            <option value="beverage">Beverage</option>
+            <option value="other">Other</option>
           </select>
           <button type="submit">Add</button>
         </form>
@@ -138,22 +143,22 @@ function App() {
         <ul>
           {potluckList.map((potluckLi) => {
             return (
-              <li className="stickyNoteLi" key={potluckLi.key}>
+              <li className={`stickyNoteLi `} key={potluckLi.key}>
                 <div className="pin">
                 </div>
                 <ul className="stickyContainer">
                   <li><p><span className="name">Name:</span> {potluckLi.value[0]}</p></li>
                   <li><p><span className="item">Bringing:</span> {potluckLi.value[1]}</p></li>
-                  <li><p><span className="category">Category:</span> {potluckLi.value[2]}</p></li>
+                  <li><p><span class={`${potluckLi.value[2]}`}>{potluckLi.value[3]}</span></p></li>
                 </ul>
-                <p><button onClick={handleClick}>♥</button> {countValue}</p>
                 <button className="removeBtn" onClick={() => handleDelete(potluckLi.key)}> x </button>
-                {/* <FontAwesomeIcon icon={["fa", "Times", "circle"]} /> */}
               </li>
             )
           })}
         </ul>
+
       </div>
+
       <Footer />
     </div>
 
