@@ -6,7 +6,6 @@ import Footer from './Footer';
 import "./FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 function App() {
 
   const [ potluckList, setPotluckList ] = useState([]);
@@ -34,7 +33,7 @@ function App() {
           key: propertyName,
           value: responseData[propertyName]
         }
-        newStateArray.push(Object);
+        newStateArray.unshift(Object);
       }
 
       // Set new potluck list to state
@@ -55,7 +54,7 @@ function App() {
     }
   }
 
-  // Function that converts the value name to a string with space and capitalization
+  // Object that contains key-value pairs; the KEY is the select element's option value, and the VALUE is the string with space and capitalization. This is for display purposes on the stickynote li
   const categorySelectDisplayText = {
     mainDish: "Main Dish",
     sideDish: "Side Dish",
@@ -103,7 +102,7 @@ function App() {
 
           {/* ---- Form Section --- */}
           <form action="submit" onSubmit={handleSubmit}>
-            <label htmlfor="userNameInput" class="sr-only">Name:</label>
+            <label htmlfor="userNameInput" className="sr-only">Name:</label>
             <input
               id="userNameInput"
               type="text"
@@ -112,7 +111,7 @@ function App() {
               onChange={handleInputChange}
               value={nameInput}
             />
-            <label htmlfor="userItemInput" class="sr-only">Item:</label>
+            <label htmlfor="userItemInput" className="sr-only">Item:</label>
             <input
               id="userItemInput"
               type="text"
@@ -121,7 +120,7 @@ function App() {
               onChange={handleInputChange}
               value={itemInput}
             />
-            <label htmlfor="userCategorySelect" class="sr-only">Category:</label>
+            <label htmlfor="userCategorySelect" className="sr-only">Category:</label>
             <select
               name="userCategorySelect"
               id="userCategorySelect"
@@ -150,9 +149,9 @@ function App() {
                     <p>{potluckLi.value[0]}</p>
                     <h2>Bringing:</h2> 
                     <p>{potluckLi.value[1]}</p>
-                    <p><span class={`${potluckLi.value[2]}`}>{potluckLi.value[3]}</span></p>
+                    <p><span className={`${potluckLi.value[2]}`}>{potluckLi.value[3]}</span></p>
                   </div>
-                  <button className="removeBtn" onClick={() => handleDelete(potluckLi.key)}><FontAwesomeIcon icon="times"/></button>
+                  <button className="removeBtn" onClick={() => handleDelete(potluckLi.key)} aria-label="Remove list item"><FontAwesomeIcon icon="times" aria-hidden="true" /></button>
                 </li>
               )
             })}

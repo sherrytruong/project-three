@@ -10,7 +10,7 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 
 /* END SET UP CSS */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta+Vaani&family=Roboto&display=swap');
 
 * {
   margin: 0;
@@ -27,6 +27,10 @@ body {
   justify-content: space-between;
 }
 
+.App {
+  text-align: center;
+}
+
 .wrapper {
   max-width: 1200px;
   width: 90%;
@@ -34,8 +38,9 @@ body {
   margin-right: auto;
 }
 
-.App {
-  text-align: center;
+.container {
+  padding: 5vw 0;
+  min-height: calc(100vh - 44px);
 }
 
 .instructions {
@@ -43,15 +48,11 @@ body {
   max-width: 850px;
 }
 
-.container {
-  padding: 5vw 0;
-  min-height: calc(100vh - 44px);
-}
-
 h1 {
   padding: 5px 10px;
   color: #708a2b;
-  font-size: 50px;
+  font-size: 54px;
+  font-family: 'Mukta Vaani', sans-serif;
   letter-spacing: 5px;
   text-transform: uppercase;
   text-shadow: 3px 3px #f1c7c7;
@@ -95,6 +96,7 @@ form {
 
 form input[type=text], 
 select {
+  color: #53330a;
   padding: 5px;
   margin: 5px 0;
   background: #fff;
@@ -156,32 +158,27 @@ ul {
 
 .mainDish, .sideDish, .dessert, .beverage, .other {
   display: block;
-  text-align: center;
-  padding: 1px 5px;
+  padding: 1px 6px;
 }
 
 .mainDish {
-  background: #f078289a;
+  background: #fa873b77;
 }
 
 .sideDish {
-  background: #a1e6a1dc;
+  background: #91e7918f;
 }
 
 .dessert {
-  background: #f186c5;
+  background: #f186c4ad;
 }
 
 .beverage {
-  background: #b3e9e5;
+  background: #b3e9e5d3;
 }
 
 .other {
-  background: #ffffffa1;
-}
-
-.stickyNoteLi p {
-  background: transparent;
+  background: #ffffffa2;
 }
 
 .removeBtn {
@@ -228,4 +225,11 @@ footer {
   padding: 10px 0;
   background: #000;
   color: #fff;
+}
+
+@media (max-width: 555px) {
+
+  h1 {
+    font-size: 42px;
+  }
 }
