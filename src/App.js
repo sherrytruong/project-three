@@ -3,11 +3,9 @@ import firebase from './firebase';
 import './App.css';
 import Instructions from './Instructions';
 import Footer from './Footer';
-
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import "./FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-library.add(faTimes);
+
 
 function App() {
 
@@ -154,7 +152,7 @@ function App() {
                     <p>{potluckLi.value[1]}</p>
                     <p><span class={`${potluckLi.value[2]}`}>{potluckLi.value[3]}</span></p>
                   </div>
-                  <button className="removeBtn" onClick={() => handleDelete(potluckLi.key)}> x </button>
+                  <button className="removeBtn" onClick={() => handleDelete(potluckLi.key)}><FontAwesomeIcon icon="times"/></button>
                 </li>
               )
             })}

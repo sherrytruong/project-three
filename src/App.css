@@ -184,14 +184,20 @@ ul {
   background: transparent;
 }
 
-ul button {
+.removeBtn {
+  font-weight: bold;
+  font-size: 20px;
   border: none;
-  color: #d31e1e;
+  color: #ce9a4d8a;
   background: none;
+  position: absolute;
+  top: 10px;
+  right: 20px;
 }
 
-ul button:hover {
-  color: #f73c3c;
+.removeBtn:hover,
+.removeBtn:focus {
+  color: #f75555;
   cursor: pointer;
 }
 
@@ -204,17 +210,6 @@ ul button:hover {
 .stickyContainer p:last-child {
   align-self: flex-end;
   justify-content: flex-end;
-}
-
-.removeBtn {
-  font-weight: bold;
-  font-size: 20px;
-  border: none;
-  color: #9696968a;
-  background: none;
-  position: absolute;
-  top: 10px;
-  right: 20px;
 }
 
 .pin {
