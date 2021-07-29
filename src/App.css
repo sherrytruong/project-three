@@ -57,6 +57,16 @@ h1 {
   text-shadow: 3px 3px #f1c7c7;
 }
 
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 2px 1px #ffffffe0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-top: 5px;
+}
+
 p {
   line-height: 1.5;
   letter-spacing: 0.3px;
@@ -66,6 +76,11 @@ p {
 a {
   text-decoration: none;
   color: #708a2b;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -91,9 +106,10 @@ select {
 
 form button[type=submit] {
   background: #de5499;
-  border: none;
   padding: 8px 5px;
+  border: none;
   border-radius: 5px;
+  box-shadow: 2px 2px #ecc1cf;
   color: #fff;
   margin: 15px auto;
   flex: 0 1 50px;
@@ -109,6 +125,11 @@ form button[type=submit]:focus {
   background: #df8fb7;
 }
 
+form button[type=submit]:active {
+  background: #bb6e94;
+  padding-right: 2px;
+}
+
 ul {
   list-style: none;
   display: flex;
@@ -119,54 +140,28 @@ ul {
 
 .stickyNoteLi {
   color: #3d2505;
-  min-height: 220px;
+  min-height: 215px;
   height: 100%;
   border-radius: 2px;
   flex-basis: 245px;
   text-align: left;
   text-transform: capitalize;
   padding: 20px;
+  border: 1px solid #cea87c3b;
   margin: 10px;
   position: relative;
   background: #ffd19d;
   box-shadow: 2px 2px 3px #d6b793;
 }
 
-.name, .item, .category {
-  font-weight: bold;
-  text-shadow: 1px 1px #ffffffce;
-  text-transform: lowercase;
-  letter-spacing: 1px;
-  display: inline-block;
-  margin-top: 5px;
-}
-
-/* .name {
-  color: #2089a3;
-  background: #10978518;
-}
-
-.item {
-  color: #20a352;
-  color: #2089a3;
-  background: #10975f18;
-} */
-
-.category {
-  /* color: #a32098; */
-  /* background: #8c109718; */
-}
-
-
-
 .mainDish, .sideDish, .dessert, .beverage, .other {
   display: block;
   text-align: center;
+  padding: 1px 5px;
 }
 
 .mainDish {
-  background: #ff8c5f9c;
-  /* box-shadow: 2px 2px 3px #acceb5; */
+  background: #f078289a;
 }
 
 .sideDish {
@@ -204,6 +199,11 @@ ul button:hover {
   display: flex;
   flex-direction: column;
   margin-top: 8%;
+}
+
+.stickyContainer p:last-child {
+  align-self: flex-end;
+  justify-content: flex-end;
 }
 
 .removeBtn {

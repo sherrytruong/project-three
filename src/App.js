@@ -100,65 +100,67 @@ function App() {
           <h1>Potluck Board</h1>
         </header>
 
-        <Instructions />
+        <main>
+          <Instructions />
 
-        {/* ---- Form Section --- */}
-        <form action="submit" onSubmit={handleSubmit}>
-          <label htmlfor="userNameInput" class="sr-only">Name:</label>
-          <input
-            id="userNameInput"
-            type="text"
-            name="userNameInput"
-            placeholder="Your Name"
-            onChange={handleInputChange}
-            value={nameInput}
-          />
-          <label htmlfor="userItemInput" class="sr-only">Item:</label>
-          <input
-            id="userItemInput"
-            type="text"
-            name="userItemInput"
-            placeholder="Your Item"
-            onChange={handleInputChange}
-            value={itemInput}
-          />
-          <label htmlfor="userCategorySelect" class="sr-only">Category:</label>
-          <select
-            name="userCategorySelect"
-            id="userCategorySelect"
-            value={categorySelect}
-            onChange={handleSelectChange}
-          >
-            <option value="placeholder" selected disabled>-- Select Category --</option>
-            <option value="mainDish">Main Dish</option>
-            <option value="sideDish">Side Dish</option>
-            <option value="dessert">Dessert</option>
-            <option value="beverage">Beverage</option>
-            <option value="other">Other</option>
-          </select>
-          <button type="submit">Add</button>
-        </form>
+          {/* ---- Form Section --- */}
+          <form action="submit" onSubmit={handleSubmit}>
+            <label htmlfor="userNameInput" class="sr-only">Name:</label>
+            <input
+              id="userNameInput"
+              type="text"
+              name="userNameInput"
+              placeholder="Your Name"
+              onChange={handleInputChange}
+              value={nameInput}
+            />
+            <label htmlfor="userItemInput" class="sr-only">Item:</label>
+            <input
+              id="userItemInput"
+              type="text"
+              name="userItemInput"
+              placeholder="Your Item"
+              onChange={handleInputChange}
+              value={itemInput}
+            />
+            <label htmlfor="userCategorySelect" class="sr-only">Category:</label>
+            <select
+              name="userCategorySelect"
+              id="userCategorySelect"
+              value={categorySelect}
+              onChange={handleSelectChange}
+            >
+              <option value="placeholder" selected disabled>-- Select Category --</option>
+              <option value="mainDish">Main Dish</option>
+              <option value="sideDish">Side Dish</option>
+              <option value="dessert">Dessert</option>
+              <option value="beverage">Beverage</option>
+              <option value="other">Other</option>
+            </select>
+            <button type="submit">Add</button>
+          </form>
 
-        {/* ---- Display Results Section --- */}
-        <ul>
-          {potluckList.map((potluckLi) => {
-            return (
-              <li className={`stickyNoteLi `} key={potluckLi.key}>
-                <div className="pin">
-                </div>
-                <ul className="stickyContainer">
-                  <li><p><span className="name">Name:</span> {potluckLi.value[0]}</p></li>
-                  <li><p><span className="item">Bringing:</span> {potluckLi.value[1]}</p></li>
-                  <li><p><span class={`${potluckLi.value[2]}`}>{potluckLi.value[3]}</span></p></li>
-                </ul>
-                <button className="removeBtn" onClick={() => handleDelete(potluckLi.key)}> x </button>
-              </li>
-            )
-          })}
-        </ul>
-
+          {/* ---- Display Results Section --- */}
+          <ul>
+            {potluckList.map((potluckLi) => {
+              return (
+                <li className={`stickyNoteLi `} key={potluckLi.key}>
+                  <div className="pin">
+                  </div>
+                  <div className="stickyContainer">
+                    <h2>Name:</h2>
+                    <p>{potluckLi.value[0]}</p>
+                    <h2>Bringing:</h2> 
+                    <p>{potluckLi.value[1]}</p>
+                    <p><span class={`${potluckLi.value[2]}`}>{potluckLi.value[3]}</span></p>
+                  </div>
+                  <button className="removeBtn" onClick={() => handleDelete(potluckLi.key)}> x </button>
+                </li>
+              )
+            })}
+          </ul>
+        </main>
       </div>
-
       <Footer />
     </div>
 
